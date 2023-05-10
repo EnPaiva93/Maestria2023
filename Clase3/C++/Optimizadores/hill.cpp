@@ -1,64 +1,39 @@
-#include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
 
-using namespace std;
+#include "hill.h"
 
-// Evaluate the fitness of the current solution
-double evaluate(double (*func)(double), double arg) {
+double Hill::evaluar(double arg){
     return func(arg);
 }
-
-// Generate a random initial solution
-double generateInitialSolution() {
+double Hill::generarSolucionInicial(){
     return -10 + static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / (10 - (-10))));
 }
-
-// Generate a new neighbor by adding a small random value to x
-double generateNeighbor(double x) {
+double Hill::generarVecino(double x){
     return x + (-1 + static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / (1 - (-1)))));
 }
-
-// Hill Climbing algorithm
-double hillClimbing(int maxIterations) {
-    // Generate a random initial solution
-    double currentSolution = generateInitialSolution();
-    int iteration = 0;
-
-    while (iteration < maxIterations) {
-        // Evaluate the fitness of the current solution
-        double currentFitness = evaluate(currentSolution);
-
-        // Generate a new neighbor solution
-        double neighborSolution = generateNeighbor(currentSolution);
-
-        // Evaluate the fitness of the neighbor solution
-        double neighborFitness = evaluate(neighborSolution);
-
-        // If the neighbor has higher fitness, move to that solution
-        if (neighborFitness > currentFitness) {
-            currentSolution = neighborSolution;
+double Hill::hillClimbing(int maxIteraciones){
+    solucionActual = generarSolucionInicial();
+    int iteraciones = 0;
+    while(iteraciones < maxIteraciones){
+        double FitnessActual = evaluar(solucionActual);
+        double solucionesVecinas = generarVecino(solucionActual);
+        double FitnessVecino = evaluar(solucionesVecinas);
+        if(iteraciones < 10){
+            cout << solucionActual << " " << FitnessActual << " " << solucionesVecinas << " " <<FitnessVecino << endl;
         }
-        iteration++;
+        if(FitnessVecino > FitnessActual){
+            solucionActual = solucionesVecinas;
+        }
+        iteraciones++;
     }
-    return currentSolution;
+    return solucionActual;
 }
 
-// Evaluate the fitness of the current solution
-double myfun(double x) {
-    return 7 + 2*x - pow(x, 2);
-}
 
-int main() {
-    srand(time(nullptr)); // seed the random number generator
 
-    int maxIterations = 10000; // maximum number of iterations
-    double solution = hillClimbing(maxIterations);
 
-    // Print the final solution
-    cout << "x = " << solution << ", f(x) = " << evaluate(solution) << endl;
 
-    return 0;
-}
- 
+
+
