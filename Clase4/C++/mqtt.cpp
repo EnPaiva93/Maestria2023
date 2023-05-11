@@ -4,6 +4,9 @@
 #include <chrono>
 #include <thread>
 
+// Pueden probar el funcionamiento del código, abriendo primero el archivo "pruebaMQTT.html" en su navegador
+// Luego prueban el código
+
 void enviar_mensaje(const std::string& ip, const std::string& topic, const double& num){
     std::ostringstream ss;
     ss << "mosquitto_pub -h " << ip << " -V mqttv311 -t " << topic << " -m " << num << " -d";
