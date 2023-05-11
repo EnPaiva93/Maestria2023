@@ -5,7 +5,7 @@
 #include <thread>
 
 // Pueden probar el funcionamiento del código, abriendo primero el archivo "pruebaMQTT.html" en su navegador
-// Luego prueban el código
+// Luego corren el código
 
 void enviar_mensaje(const std::string& ip, const std::string& topic, const double& num){
     std::ostringstream ss;
