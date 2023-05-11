@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MQTT Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.2.7/mqtt.min.js"></script>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            height: 100vh;
+        }
+        h1 {
+            grid-column: 1/3;
+            text-align: center;
+        }
+        h2 {
+            grid-column: 1/6;
+            text-align: center;
+        }
+        canvas {
+            grid-column: 1/4;
+            grid-row: 2/3;
+        }
+        .grid1 {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+        .grid2 {
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+        .grid3 {
+            grid-column: 3/4;
+            grid-row: 1/2;
+        }
+        .grid4 {
+            grid-column: 1/2;
+            grid-row: 2/3;
+        }
+        .grid5 {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+        .grid6 {
+            grid-column: 3/4;
+            grid-row: 2/3;
+        }
+        .grid7 {
+            grid-column: 1/2;
+            grid-row: 3/4;
+        }
+        .grid8 {
+            grid-column: 2/3;
+            grid-row: 3/4;
+        }
+        .grid9 {
+            grid-column: 3/4;
+            grid-row: 3/4;
+        }
+        .container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		/* style the button */
+		.ledButton {
+			border: none; /* remove the border */
+			background-color: green; /* set the background color */
+			color: white; /* set the text color */
+			border-radius: 50%; /* make it circular */
+			width: 100px;
+			height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 24px;
+			cursor: pointer;
+			}
+    </style>
+</head>
+<body>
+        <div class="grid1">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu1</span>)</h2>
+        <div class="container">
+			<button class="ledButton" id="ledButton4">ON</button>
+		</div>
+		
+        <script>
+        var ledState = false;  // initial state is OFF
+
+        // create MQTT client
+        var client4 = mqtt.connect('ws://localhost:9001/mqtt');
+        client4.on('connect', function () {
+            client4.subscribe('alu1');
+        });
+
+        // handle incoming MQTT messages
+        client4.on('message', function (topic, message) {
+            var state = message.toString();
+            console.log(state);
+            if (state.localeCompare('on') == 1 || state.localeCompare('on') == 0) {
+                ledState = true;
+                document.getElementById('ledButton4').style.backgroundColor = 'green';
+                document.getElementById('ledButton4').textContent = 'ON';
+            } else if (state.localeCompare('off') == 1 || state.localeCompare('off') == 0) {
+                ledState = false;
+                document.getElementById('ledButton4').style.backgroundColor = 'red';
+                document.getElementById('ledButton4').textContent = 'OFF';
+            }
+        });
+
+    	</script>
+        
+        </div>
+        <div class="grid2">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu2</span>)</h2>
+        <div class="container">
+			<button class="ledButton" id="ledButton5">ON</button>
+		</div>
+		
+        <script>
+        var ledState = false;  // initial state is OFF
+
+        // create MQTT client
+        var client5 = mqtt.connect('ws://localhost:9001/mqtt');
+        client5.on('connect', function () {
+            client5.subscribe('alu2');
+        });
+
+        // handle incoming MQTT messages
+        client5.on('message', function (topic, message) {
+            var state = message.toString();
+            console.log(state);
+            if (state.localeCompare('on') == 1 || state.localeCompare('on') == 0) {
+                ledState = true;
+                document.getElementById('ledButton5').style.backgroundColor = 'green';
+                document.getElementById('ledButton5').textContent = 'ON';
+            } else if (state.localeCompare('off') == 1 || state.localeCompare('off') == 0) {
+                ledState = false;
+                document.getElementById('ledButton5').style.backgroundColor = 'red';
+                document.getElementById('ledButton5').textContent = 'OFF';
+            }
+        });
+
+    	</script>
+        
+        </div>
+        
+        <div class="grid3">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu3</span>)</h2>
+        <div class="container">
+			<button class="ledButton" id="ledButton6">ON</button>
+		</div>
+		
+        <script>
+        var ledState = false;  // initial state is OFF
+
+        // create MQTT client
+        var client6 = mqtt.connect('ws://localhost:9001/mqtt');
+        client6.on('connect', function () {
+            client6.subscribe('alu3');
+        });
+
+        // handle incoming MQTT messages
+        client6.on('message', function (topic, message) {
+            var state = message.toString();
+            console.log();
+            if (state.localeCompare('on') == 1 || state.localeCompare('on') == 0) {
+                ledState = true;
+                document.getElementById('ledButton6').style.backgroundColor = 'green';
+                document.getElementById('ledButton6').textContent = 'ON';
+            } else if (state.localeCompare('off') == 1 || state.localeCompare('off') == 0) {
+                ledState = false;
+                document.getElementById('ledButton6').style.backgroundColor = 'red';
+                document.getElementById('ledButton6').textContent = 'OFF';
+            }
+        });
+
+    	</script>
+        
+        </div>
+        
+        
+        
+        <div class="grid4">
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu4</span>)</h2>
+        <canvas id="myChart1"></canvas>
+        <script>
+            var ctx = document.getElementById('myChart1').getContext('2d');
+            var chart1 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Numbers',
+                        data: [],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Numbers'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+
+			var client1 = mqtt.connect('ws://localhost:9001/mqtt');
+
+                client1.on('connect', function () {
+                    client1.subscribe('alu4');
+                });
+
+                client1.on('message', function (topic, message) {
+    			var payload = message.toString();
+    			var time = new Date().toLocaleTimeString();
+    			chart1.data.labels.push(time);
+    			chart1.data.datasets[0].data.push(payload);
+    			if (chart1.data.labels.length > 10) {
+        			chart1.data.labels.shift();
+        			chart1.data.datasets[0].data.shift();
+    			}
+    			chart1.update();
+    			if (payload === "reset") {
+        			chart1.destroy();
+        			chart1 = new Chart(ctx, {
+            			type: 'line',
+            			data: {
+                			labels: [],
+                			datasets: [{
+                    			label: 'Numbers',
+                    			data: [],
+                    			fill: false,
+                    			borderColor: 'rgb(75, 192, 192)',
+                    			tension: 0.1
+                			}]
+            			},
+            			options: {
+                			responsive: true,
+                			plugins: {
+                    			legend: {
+                        			display: false
+                    			}
+                			},
+                			scales: {
+                    			x: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Time'
+                        			}
+                    			},
+                    			y: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Numbers'
+                        			},
+                        			suggestedMin: 0,
+                        			suggestedMax: 10
+                    			}
+                			}
+            			}
+        			});
+    			}
+			});
+
+        </script>
+        </div>
+        
+        <div class="grid5">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu5</span>)</h2>
+        <canvas id="myChart2"></canvas>
+        <script>
+            var ctx = document.getElementById('myChart2').getContext('2d');
+            var chart2 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Numbers',
+                        data: [],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Numbers'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+
+			var client2 = mqtt.connect('ws://localhost:9001/mqtt');
+
+                client2.on('connect', function () {
+                    client2.subscribe('alu5');
+                });
+
+                client2.on('message', function (topic, message) {
+    			var payload = message.toString();
+    			var time = new Date().toLocaleTimeString();
+    			chart2.data.labels.push(time);
+    			chart2.data.datasets[0].data.push(payload);
+    			if (chart2.data.labels.length > 10) {
+        			chart2.data.labels.shift();
+        			chart2.data.datasets[0].data.shift();
+    			}
+    			chart2.update();
+    			if (payload === "reset") {
+        			chart2.destroy();
+        			chart2 = new Chart(ctx, {
+            			type: 'line',
+            			data: {
+                			labels: [],
+                			datasets: [{
+                    			label: 'Numbers',
+                    			data: [],
+                    			fill: false,
+                    			borderColor: 'rgb(75, 192, 192)',
+                    			tension: 0.1
+                			}]
+            			},
+            			options: {
+                			responsive: true,
+                			plugins: {
+                    			legend: {
+                        			display: false
+                    			}
+                			},
+                			scales: {
+                    			x: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Time'
+                        			}
+                    			},
+                    			y: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Numbers'
+                        			},
+                        			suggestedMin: 0,
+                        			suggestedMax: 10
+                    			}
+                			}
+            			}
+        			});
+    			}
+			});
+
+        </script>
+        
+        </div>
+        
+        
+        <div class="grid6">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu6</span>)</h2>
+        <canvas id="myChart3"></canvas>
+        <script>
+            var ctx = document.getElementById('myChart3').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Numbers',
+                        data: [],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Numbers'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+
+			var client3 = mqtt.connect('ws://localhost:9001/mqtt');
+
+                client3.on('connect', function () {
+                    client3.subscribe('alu6');
+                });
+
+                client3.on('message', function (topic, message) {
+    			var payload = message.toString();
+    			var time = new Date().toLocaleTimeString();
+    			chart.data.labels.push(time);
+    			chart.data.datasets[0].data.push(payload);
+    			if (chart.data.labels.length > 10) {
+        			chart.data.labels.shift();
+        			chart.data.datasets[0].data.shift();
+    			}
+    			chart.update();
+    			if (payload === "reset") {
+        			chart.destroy();
+        			chart = new Chart(ctx, {
+            			type: 'line',
+            			data: {
+                			labels: [],
+                			datasets: [{
+                    			label: 'Numbers',
+                    			data: [],
+                    			fill: false,
+                    			borderColor: 'rgb(75, 192, 192)',
+                    			tension: 0.1
+                			}]
+            			},
+            			options: {
+                			responsive: true,
+                			plugins: {
+                    			legend: {
+                        			display: false
+                    			}
+                			},
+                			scales: {
+                    			x: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Time'
+                        			}
+                    			},
+                    			y: {
+                        			display: true,
+                        			title: {
+                            			display: true,
+                            			text: 'Numbers'
+                        			},
+                        			suggestedMin: 0,
+                        			suggestedMax: 10
+                    			}
+                			}
+            			}
+        			});
+    			}
+			});
+
+        </script>
+        
+        
+        </div>
+        
+        
+        
+        
+        <div class="grid7">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu7</span>)</h2>
+        <h2>El valor es: <span id="text7" style="color:red"></span></h2>
+		
+        <script>
+
+        // create MQTT client
+        var client7 = mqtt.connect('ws://localhost:9001/mqtt');
+        client7.on('connect', function () {
+            client7.subscribe('alu7');
+        });
+
+        // handle incoming MQTT messages
+        client7.on('message', function (topic, message) {
+            var state = message.toString();
+			document.getElementById('text7').textContent = state;
+        });
+
+    	</script>
+        
+        </div>
+        <div class="grid8">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu8</span>)</h2>
+        <h2>El valor es: <span id="text8" style="color:red"></span></h2>
+		
+        <script>
+
+        // create MQTT client
+        var client8 = mqtt.connect('ws://localhost:9001/mqtt');
+        client8.on('connect', function () {
+            client8.subscribe('alu8');
+        });
+
+        // handle incoming MQTT messages
+        client8.on('message', function (topic, message) {
+            var state = message.toString();
+			document.getElementById('text8').textContent = state;
+        });
+
+    	</script>
+        
+        </div>
+        <div class="grid9">
+        
+        <h2>MQTT Dashboard (topic: <span style="Color:blue">alu9</span>)</h2>
+        <h2>El valor es: <span id="text9" style="color:red"></span></h2>
+		
+        <script>
+
+        // create MQTT client
+        var client9 = mqtt.connect('ws://localhost:9001/mqtt');
+        client9.on('connect', function () {
+            client9.subscribe('alu9');
+        });
+
+        // handle incoming MQTT messages
+        client9.on('message', function (topic, message) {
+            var state = message.toString();
+			document.getElementById('text9').textContent = state;
+        });
+
+    	</script>
+        
+        </div>
+    </div>
+</body>
+</html>
